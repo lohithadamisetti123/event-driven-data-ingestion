@@ -9,7 +9,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src
-
-ENV PYTHONPATH=/app/src
+COPY tests/ ./tests
+ENV PYTHONPATH=/app
 
 CMD ["python", "src/consumer.py"]

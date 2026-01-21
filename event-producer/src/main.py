@@ -8,7 +8,7 @@ from fastapi import FastAPI, HTTPException, status
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 
-from schemas.events import RawEvent
+from src.schemas.events import RawEvent
 
 
 def json_serializer(value: Dict[str, Any]) -> bytes:
@@ -90,5 +90,9 @@ async def ingest_event(event: RawEvent) -> Dict[str, Any]:
 @app.get("/health", status_code=status.HTTP_200_OK)
 async def health_check() -> Dict[str, Any]:
     global producer
-    connected = bool(producer and producer.bootstrap_connected())
-    return {"status": "ok" if connected else "degraded", "kafka_connected": connected}
+    bootstrap = bool(producer and producer.bootstrap_connected())
+    # Consider overall status OK as long as app is running; expose Kafka flag separately
+    return {
+        "status": "ok",
+        "kafka_connected": bootstrap,
+    }
