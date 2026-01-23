@@ -2,11 +2,8 @@
 
 Event-driven backend using **FastAPI**, **Apache Kafka**, and **MySQL**. It ingests events via HTTP, publishes them to Kafka, processes them asynchronously in a consumer service, and stores processed results in MySQL.
 
----
 
-## Watch Demo Video
 
-👉 **Demo:** https://youtu.be/YOUR_DEMO_VIDEO_ID
 
 ---
 
@@ -138,4 +135,5 @@ docker-compose run --rm integration-tests
 
 ```text
 https://github.com/lohithadamisetti123/event-driven-data-ingestion
+
 
